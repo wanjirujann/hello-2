@@ -13,7 +13,7 @@ class CoursesActivity : AppCompatActivity() {
 
         var courseList = listOf(
             Course("1", "Google Cloud", "Cloud 101", "Nigel Poulton", "Cloud all the way"),
-            Course("2", "Android Kotlin", "AAD 201", "Chet Hasse", "Android development training"),
+            Course("2", "Android Kotlin", "AAD 201", "Chet Hasse", "Design Development"),
             Course(
                 "3",
                 "Mysql",
