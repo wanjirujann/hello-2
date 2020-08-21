@@ -35,7 +35,6 @@ class RegistrationActivity : AppCompatActivity() {
 
             signUpUser(requestBody)
 
-            //registerUser(firstName, lastName, email, phoneNumber, password)
         }
     }
 
@@ -63,47 +62,5 @@ class RegistrationActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
-
-/*
-    private fun registerUser(
-        firstName: String,
-        lastName: String,
-        email: String,
-        phoneNumber: String,
-        password: String
-    ) {
-        //var apiClient = ApiClient.buildService(ApiInterface::class.java)
-        //var call = apiClient.registerStudent(firstName,lastName, email, phoneNumber, password)
-
-        var call =
-            ApiClient.apiService.registerStudent(firstName, lastName, email, phoneNumber, password)
-
-
-        call.enqueue(object : Callback<RegistrationResponse> {
-            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
-                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<RegistrationResponse>,
-                response: Response<RegistrationResponse>
-            ) {
-                if (response.isSuccessful) {
-                    Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG).show()
-                    startActivity(Intent(baseContext, MainActivity::class.java))
-                } else {
-                    Toast.makeText(baseContext, response.message().toString(), Toast.LENGTH_LONG)
-                        .show()
-                }
-            }
-
-        })
-
-
-    }
-*/
-
-
 }
