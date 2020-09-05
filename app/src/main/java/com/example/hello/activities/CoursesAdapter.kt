@@ -1,9 +1,11 @@
-package com.example.hello
+package com.example.hello.activities
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hello.models.Course
+import com.example.hello.R
 import kotlinx.android.synthetic.main.row_course_item.view.*
 
 class CoursesAdapter(
@@ -13,7 +15,9 @@ class CoursesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
         var itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.row_course_item, parent, false)
-        return CoursesViewHolder(itemView)
+        return CoursesViewHolder(
+            itemView
+        )
     }
 
     override fun getItemCount(): Int {

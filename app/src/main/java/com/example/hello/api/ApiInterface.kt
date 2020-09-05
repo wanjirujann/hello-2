@@ -1,5 +1,8 @@
-package com.example.hello
+package com.example.hello.api
 
+import com.example.hello.models.CoursesResponse
+import com.example.hello.models.LoginResponse
+import com.example.hello.models.RegistrationResponse
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*

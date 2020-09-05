@@ -1,9 +1,13 @@
-package com.example.hello
+package com.example.hello.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hello.R
+import com.example.hello.models.RegistrationResponse
+import com.example.hello.api.ApiClient
+import com.example.hello.api.ApiInterface
 import kotlinx.android.synthetic.main.activity_registration.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
