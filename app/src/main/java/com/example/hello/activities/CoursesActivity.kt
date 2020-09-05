@@ -12,13 +12,17 @@ import com.example.hello.R
 import com.example.hello.api.ApiClient
 import com.example.hello.api.ApiInterface
 import com.example.hello.database.HelloDatabase
+import com.example.hello.models.RegisterCourse
+import com.example.hello.models.RegistrationResponse
 import kotlinx.android.synthetic.main.activity_courses.*
+import kotlinx.android.synthetic.main.row_course_item.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class CoursesActivity : AppCompatActivity() {
+class CoursesActivity : AppCompatActivity(), CourseItemClickListener {
 
     lateinit var database: HelloDatabase
 
@@ -29,6 +33,8 @@ class CoursesActivity : AppCompatActivity() {
         database = Room.databaseBuilder(baseContext, HelloDatabase::class.java, "hello-db").build()
 
         fetchCourses()
+
+
     }
 
     private fun fetchCourses() {
@@ -78,9 +84,49 @@ class CoursesActivity : AppCompatActivity() {
     }
 
     fun displayCourses(courses: List<Course>) {
-        var coursesAdapter = CoursesAdapter(courses)
+        var coursesAdapter = CoursesAdapter(courses, this)
         rvCourses.layoutManager = LinearLayoutManager(baseContext)
         rvCourses.adapter = coursesAdapter
+    }
+
+    override fun onItemClick(course: Course) {
+        //obtain student id from shared preferences
+        //courseId = course.courseId
+        //make a post request https://github.com/owuor91/registration-api
+
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
+        val accessToken = sharedPreferences.getString("ACCESS_TOKEN_KEY", "")
+        val studentId = sharedPreferences.getString("STUDENT_ID_KEY", "")
+        var courseId = course.courseId
+
+        var requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("course_id", courseId)
+            .addFormDataPart("student_id", studentId!!)
+            .build()
+
+
+        val apiClient = ApiClient.buildService(ApiInterface::class.java)
+        val coursesCall = apiClient.registerCourse(requestBody,"Bearer $accessToken")
+
+
+        coursesCall.enqueue(object : Callback<RegisterCourse> {
+            override fun onFailure(call: Call<RegisterCourse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResponse(
+                call: Call<RegisterCourse>,
+                response: Response<RegisterCourse>
+            ) {
+                if(response.isSuccessful){
+                    Toast.makeText(this@CoursesActivity, "Registered", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        })
     }
 
 }

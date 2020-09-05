@@ -53,9 +53,12 @@ class Login : AppCompatActivity() {
                     Toast.makeText(baseContext, response.body()?.message, Toast.LENGTH_LONG).show()
 
                     var accessToken = response.body()?.accessToken
-                    var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(baseContext)
+                    val studentId = response.body()?.studentId
+                    var sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(baseContext)
                     var editor = sharedPreferences.edit()
                     editor.putString("ACCESS_TOKEN_KEY", accessToken)
+                    editor.putString("STUDENT_ID_KEY", studentId)
                     editor.apply()
 
                     startActivity(Intent(baseContext, CoursesActivity::class.java))
