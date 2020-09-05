@@ -1,13 +1,16 @@
-package com.example.hello
+package com.example.hello.activities
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hello.models.Course
+import com.example.hello.R
 import kotlinx.android.synthetic.main.row_course_item.view.*
 
 class CoursesAdapter(
-    var courseList: List<Course>
+    var courseList: List<Course>,
+    var courseItemClickListener: CourseItemClickListener
 ) : RecyclerView.Adapter<CoursesAdapter.CoursesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesViewHolder {
@@ -25,6 +28,9 @@ class CoursesAdapter(
         holder.rowView.tvCourseName.text = courseList[position].courseName
         holder.rowView.tvDescription.text = courseList[position].description
         holder.rowView.tvInstructor.text = courseList[position].instructor
+        holder.rowView.btnRegisterCourse.setOnClickListener {
+            courseItemClickListener.onItemClick(courseList[position])
+        }
     }
 
     class CoursesViewHolder(val rowView: View) : RecyclerView.ViewHolder(rowView)

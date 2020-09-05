@@ -1,4 +1,4 @@
-package com.example.hello
+package com.example.hello.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
